@@ -27,6 +27,7 @@ micronaut {
 dependencies {
     kapt("io.micronaut.data:micronaut-data-processor")
     kapt("io.micronaut.security:micronaut-security-annotations")
+    kapt("io.micronaut.openapi:micronaut-openapi")
     implementation("io.micronaut:micronaut-http-client")
     implementation("io.micronaut:micronaut-runtime")
     implementation("io.micronaut.data:micronaut-data-hibernate-jpa")
@@ -42,6 +43,8 @@ dependencies {
     implementation ("org.springframework.security:spring-security-crypto:5.4.2")
     compile ("commons-logging:commons-logging:1.2")
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
+    implementation("io.swagger.core.v3:swagger-annotations")
+    implementation("io.micronaut.openapi:micronaut-openapi")
 
 }
 
@@ -51,6 +54,12 @@ application {
 }
 java {
     sourceCompatibility = JavaVersion.toVersion("11")
+}
+
+kapt {
+    arguments {
+        arg("micronaut.openapi.views.spec", "redoc.enabled=true,rapidoc.enabled=true,swagger-ui.enabled=true,swagger-ui.theme=flattop")
+    }
 }
 
 tasks {
